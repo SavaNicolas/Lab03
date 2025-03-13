@@ -50,6 +50,26 @@ def controlloOrtografico(testo,dizionario):
 
     return risultato
 
+def controlloOrtograficoDicotomico(testo,dizionario):
+    """
+    metodo per controllare le parole sbagliate nel testo
+    :param testo:
+    :param dizionario:
+    :return:
+    """
+    #porto tutto in minuscolo e rimpiazzo segni particolari
+    testo= sistemaTesto(testo)
+    #per ogni parola confronto se è presente nel dizionario con contains, se non è presente la metto in un array con le parole sbagliate
+    paroleTesto= testo.split() #array con le parole
+    tic = datetime.datetime.now()
+    paroleSbagliate= dizionario.controlloCorrispondenzeDicotomica(paroleTesto)
+    toc = datetime.datetime.now()
+    paroleSbagliateStringa=toStringParole(paroleSbagliate)
+
+    risultato= f"Ci sono {len(paroleSbagliate)}:\n {paroleSbagliateStringa} e l'operazione è stata svolta in {toc-tic}"
+
+    return risultato
+
 def sistemaTesto(testo):
     #prima porto in minuscolo
     testo= testo.lower()
@@ -70,7 +90,7 @@ if int(txtIn) == 1:
     dizionario = loadDictionary("resources/Italian.txt")
     print("Inserisci la tua frase in Italiano\n")
     txtIn = input()
-    controllo = controlloOrtografico(txtIn,dizionario)
+    controllo = controlloOrtograficoDicotomico(txtIn,dizionario)
     print("______________________________")
     print(controllo)
     print("______________________________")
