@@ -1,14 +1,13 @@
 class Dictionary:
-    def __init__(self):
-        pass
-
-    def loadDictionary(self,path):
-        pass
+    def __init__(self,dict= []):
+        self.dict= dict
 
     def printAll(self):
         pass
 
-
-    @property
-    def dict(self):
-        return self._dict
+    def controlloCorrispondenze(self,paroleTesto):
+        paroleSbagliate=[]
+        for i in paroleTesto:
+            if i not in self.dict:
+                paroleSbagliate.append(i)
+        return paroleSbagliate
